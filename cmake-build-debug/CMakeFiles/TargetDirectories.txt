@@ -1,0 +1,3 @@
+/Users/makaylabrown/Library/Mobile Documents/com~apple~CloudDocs/college class workspace/year 3 semester 1/Intro to C and Unix/Project 1/proj1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/makaylabrown/Library/Mobile Documents/com~apple~CloudDocs/college class workspace/year 3 semester 1/Intro to C and Unix/Project 1/proj1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/makaylabrown/Library/Mobile Documents/com~apple~CloudDocs/college class workspace/year 3 semester 1/Intro to C and Unix/Project 1/proj1/cmake-build-debug/CMakeFiles/proj1.dir
