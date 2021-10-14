@@ -1,8 +1,0 @@
-seed = 899
-Dead end on hop 2: no outgoing links
-seed = 983
-Dead end on hop 5: no outgoing links
-seed = 187
-seed = 1550698386
-Dead end on hop 4: no outgoing links
-seed = 1550698622

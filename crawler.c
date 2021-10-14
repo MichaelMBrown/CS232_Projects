@@ -14,6 +14,7 @@ struct listNode{
   struct listNode *next;
 };
 
+
 /*
  * returns 1 if the list starting at pNode contains the address addr,
  *    and returns 0 otherwise
@@ -43,21 +44,20 @@ void destroyList(struct listNode *pNode);
  * getLink returns 1 if a link was found and 0 otherwise.
  * If a link was found, "link" will be filled in with the web address.
  */
-int getLink(const char* srcAddr, char* link, const int maxLinkLength);
+int getLink(const char* srcAddr, char* link, int maxLinkLength);
 
 int main(int argc, char** argv){
   
   long seed;
-
   char startAddr[MAX_ADDR_LENGTH];
   char destAddr[MAX_ADDR_LENGTH];
   
-  int hopNum, numHops;
-  
-  struct listNode *pListStart;
+  int currentHop, hopLimit;
+
+  struct listNode *listNodeHead;
 
   if(argc < 3 || argc > 4){
-    fprintf(stderr, "USAGE: %s startAddr numHops [rand seed]", argv[0]);
+    fprintf(stderr, "USAGE: %s startAddr hopLimit [rand seed]", argv[0]);
     return -1;
   }
   
@@ -75,38 +75,38 @@ int main(int argc, char** argv){
   strncpy(startAddr, argv[1], MAX_ADDR_LENGTH);
   startAddr[MAX_ADDR_LENGTH - 1] = '\0';
 
-  numHops = atoi(argv[2]);
+    hopLimit = atoi(argv[2]);
 
-  pListStart = malloc(sizeof(struct listNode));
-  if(pListStart == NULL){
+    listNodeHead = malloc(sizeof(struct listNode));
+  if(listNodeHead == NULL){
     fprintf(stderr, "ERROR: could not allocate memory\n");
     return -2;
   }
-  strncpy(pListStart->addr, startAddr, MAX_ADDR_LENGTH);
-  pListStart->next = NULL;
+  strncpy(listNodeHead->addr, startAddr, MAX_ADDR_LENGTH);
+    listNodeHead->next = NULL;
 
   /* start the crawling */
-  for(hopNum=1; hopNum <= numHops; hopNum++){
+  for(currentHop=1; currentHop <= hopLimit; currentHop++){
     int res = getLink(startAddr, destAddr, MAX_ADDR_LENGTH);
 
     if(!res){
-      printf("Dead end on hop %d: no outgoing links\n", hopNum);
+      printf("Dead end on hop %d: no outgoing links\n", currentHop);
       break;
     }
 
-    if(contains(pListStart, destAddr)){
-      printf("Cycle detected on hop %d: address %s\n", hopNum, destAddr);
-      hopNum--; // try again for this hop in the next iteration
+    if(contains(listNodeHead, destAddr)){
+      printf("Cycle detected on hop %d: address %s\n", currentHop, destAddr);
+      currentHop--; // try again for this hop in the next iteration
     }
     else{
-      insertBack(pListStart, destAddr);
+      insertBack(listNodeHead, destAddr);
       strncpy(startAddr, destAddr, MAX_ADDR_LENGTH);
     }
   }
 
-  printAddresses(pListStart);
+  printAddresses(listNodeHead);
 
-  destroyList(pListStart);
+  destroyList(listNodeHead);
 
   return 0;
 }
@@ -117,8 +117,17 @@ int main(int argc, char** argv){
  *    and returns 0 otherwise
  */
 int contains(const struct listNode *pNode, const char *addr){
-  // TODO: complete this
-
+    int i = 0;
+    const struct listNode *tmpNode;
+    tmpNode = pNode;
+    do {
+        if (tmpNode->addr == addr){
+            printf("Found a match\n");
+            return 1;
+        }
+        i++;
+        tmpNode=tmpNode->next;
+    }while ((tmpNode != NULL) && (tmpNode->addr != addr));
   return 0;
 }
     
@@ -129,6 +138,20 @@ int contains(const struct listNode *pNode, const char *addr){
  */
 void insertBack(struct listNode *pNode, const char *addr){
   // TODO: complete this
+  struct listNode *temp,*newNode;
+    newNode=(struct listNode*) malloc(sizeof (struct listNode));
+    if (newNode==NULL){
+        fprintf(stderr,"ERROR: Cannot allocate memory\n");
+        exit(EXIT_FAILURE);
+    } else{
+        strncpy(newNode->addr, addr, MAX_ADDR_LENGTH);
+        newNode->next=NULL;
+        temp=pNode;
+        while (temp->next != NULL){
+            temp=temp->next;
+        }
+        temp->next=newNode;
+    }
 }
 
 
@@ -137,14 +160,23 @@ void insertBack(struct listNode *pNode, const char *addr){
  *   one on each line
  */
 void printAddresses(const struct listNode *pNode){
-  // TODO: complete this
+    const struct listNode *tmpNode;
+    if (pNode==NULL){
+        fprintf(stderr,"List is empty :(");
+    } else{
+         tmpNode=pNode;
+        while (tmpNode != NULL){
+            printf("%s,\n",tmpNode->addr);
+            tmpNode=tmpNode->next;
+        }
+    }
 }
 
 /*
  * frees the memory associated with this node and all subsequent nodes
  */
 void destroyList(struct listNode *pNode){
-  // TODO: complete this
+    free(pNode);
 }
   
 

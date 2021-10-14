@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Execute" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="gcc -o crawler crawler.c -Wall ./crawler &quot;https://users.pfw.edu/chenz/testweb/page_000001.html&quot; 10 899 &gt; results.txt # shellcheck disable=SC2129 ./crawler &quot;https://users.pfw.edu/chenz/testweb/page_000010.html&quot; 5 983 &gt;&gt; results.txt ./crawler &quot;https://users.pfw.edu/chenz/testweb/page_000003.html&quot; 4 187 &gt;&gt; results.txt ./crawler &quot;https://users.pfw.edu/chenz/testweb/page_000003.html&quot; 10 1550698386 &gt;&gt; results.txt ./crawler &quot;https://users.pfw.edu/chenz/testweb/page_000003.html&quot; 10 1550698386 ./crawler &quot;https://users.pfw.edu/chenz/testweb/page_000008.html&quot; 5 1550698622 &gt;&gt; results.txt" />
+    <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+    <option name="SCRIPT_PATH" value="$PROJECT_DIR$/runTestCases.sh" />
+    <option name="SCRIPT_OPTIONS" value="" />
+    <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+    <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+    <option name="INTERPRETER_PATH" value="/bin/zsh" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="EXECUTE_IN_TERMINAL" value="true" />
+    <option name="EXECUTE_SCRIPT_FILE" value="true" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
